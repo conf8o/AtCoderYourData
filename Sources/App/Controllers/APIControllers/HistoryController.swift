@@ -1,16 +1,14 @@
 import Vapor
 
-final class HistoryController: RouteCollection {
-    
+final class HistoryAPIController: RouteCollection {
     func boot(router: Router) throws {
         let group = router.grouped("history")
         group.get("rows", String.parameter, use: rows)
         group.get("columns", String.parameter, use: columns)
     }
-    
 }
 
-extension HistoryController {
+extension HistoryAPIController {
     func rows(_ req: Request) throws -> Future<[History]> {
         let userId = try req.parameters.next(String.self)
         return History.query(on: req).first().flatMap { result in

@@ -1,0 +1,11 @@
+<div class="concrete_data_content">
+    <h3>#(data.type)</h3>
+    <h4>列ベース</h4>
+    <pre>
+    #(data.columnsBase)
+    </pre>
+    <h4>行ベース</h4>
+    <pre>
+    #(data.rowsBase)
+    </pre>
+</div>

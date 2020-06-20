@@ -1,0 +1,9 @@
+#set("title") {
+    AtCoder Your Data
+}
+
+#set("contents") {
+    <p>hello index</p>
+}
+
+#embed("body/body_base")

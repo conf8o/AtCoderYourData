@@ -1,0 +1,9 @@
+#set("body") {
+    <header></header>
+    <div>
+        #get(contents)
+    </div>
+    <footer></footer>
+}
+
+#embed("base")

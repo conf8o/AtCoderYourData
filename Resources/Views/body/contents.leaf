@@ -1,0 +1,17 @@
+#set("title") {
+    #(title)
+}
+
+#set("contents") {
+    <div id="user">#(userId)</div>
+    <div id="basic_stats">
+    #embed("body/contents/basic_stats")
+    </div>
+    <div id="concrete_data">
+    #for(data in concreteDataList) {
+        #embed("body/contents/concrete_data")
+    }
+    </div>
+}
+
+#embed("body/body_base")
