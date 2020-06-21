@@ -47,7 +47,7 @@ extension HistoryViewController {
             
             let basicStatsList = [
                 BasicStats(title: "パフォーマンス(Ratedのみ)", stats: perf),
-                BasicStats(title: "レート差", stats: diff),
+                BasicStats(title: "差分", stats: diff),
                 BasicStats(title: "順位", stats: rank)
             ]
             
@@ -64,9 +64,14 @@ extension HistoryViewController {
             let rowsTAB = "\(History.labels.joined(separator: "\t"))\n\(histories.joinedByTAB())"
             let tab = ConcreteData(type: "TAB", columnsBase: columnsTAB, rowsBase: rowsTAB)
             
+            let encoder = JSONEncoder()
+            let historiesJSON = try encoder.encode(histories)
+            let historiesJSONString = String(data: historiesJSON, encoding: .utf8) ?? "{}"
+            let historyColumnsJSON = try encoder.encode(historyColumns)
+            let historyColumnsJSONString = String(data: historyColumnsJSON, encoding: .utf8) ?? "{}"
+            let json = ConcreteData(type: "JSON", columnsBase: historyColumnsJSONString, rowsBase: historiesJSONString)
             
-            
-            let contents = BodyContents(basicStatsList: statsList, concreteDataList: [csv, tab])
+            let contents = BodyContents(basicStatsList: statsList, concreteDataList: [csv, tab, json])
             return try req.view().render("body/contents", contents)
         }
         
