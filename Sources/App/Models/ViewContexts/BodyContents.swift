@@ -1,4 +1,5 @@
 struct BodyContents: Encodable {
+    var userId: String
     var basicStatsList: [BasicStats]
     var concreteDataList: [ConcreteData]
 }

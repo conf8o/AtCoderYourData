@@ -1,5 +1,9 @@
 #set("body") {
-    <header></header>
+    <header>
+        AtCoder Your Data
+        <textarea></textarea>
+        <button>検索</button>
+    </header>
     <div class="contents">#get(contents)</div>
     <footer></footer>
 }

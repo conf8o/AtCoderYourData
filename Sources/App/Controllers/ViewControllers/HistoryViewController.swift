@@ -12,7 +12,9 @@ extension HistoryViewController {
     func data(_ req: Request) throws -> Future<View> {
         let userId = try req.parameters.next(String.self)
         
-        let columns: Future<([History], HistoryColumns)> = History.query(on: req).first().flatMap { result in
+        let rowsAndColumns: Future<([History], HistoryColumns)> = History.query(on: req)
+            .filter(\.userId, .equal, userId)
+            .first().flatMap { result in
             if let _ = result {
                 print("colums from database")
                 return History.query(on: req).filter(\.userId, .equal, userId).all().map { histories in
@@ -26,8 +28,8 @@ extension HistoryViewController {
             }
         }
         
-        let basicStatsList: Future<([History], HistoryColumns, [BasicStats])> = columns.map { histories, historyColumns in
-
+        let rowsAndColumnsAndStats: Future<([History], HistoryColumns, [BasicStats])> = rowsAndColumns.map { histories, historyColumns in
+            
             let rank = historyColumns.rank.compactMap { Double($0) }.describe()
             let perf = historyColumns.perf.compactMap { x in
                 if let x = x {
@@ -54,7 +56,7 @@ extension HistoryViewController {
             return (histories, historyColumns, basicStatsList)
         }
         
-        let view: Future<View> = basicStatsList.flatMap { histories, historyColumns, statsList in
+        let view: Future<View> = rowsAndColumnsAndStats.flatMap { histories, historyColumns, statsList in
             
             let columnsCSV = historyColumns.toCSV()
             let rowsCSV = "\(History.labels.joined(separator: ","))\n\(histories.toCSV())"
@@ -71,7 +73,7 @@ extension HistoryViewController {
             let historyColumnsJSONString = String(data: historyColumnsJSON, encoding: .utf8) ?? "{}"
             let json = ConcreteData(type: "JSON", columnsBase: historyColumnsJSONString, rowsBase: historiesJSONString)
             
-            let contents = BodyContents(basicStatsList: statsList, concreteDataList: [csv, tab, json])
+            let contents = BodyContents(userId: userId, basicStatsList: statsList, concreteDataList: [csv, tab, json])
             return try req.view().render("body/contents", contents)
         }
         
