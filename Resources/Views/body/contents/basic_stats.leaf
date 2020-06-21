@@ -5,7 +5,7 @@
         <th>標準偏差(standard deviation)</th>
         <th>最小値(min)</th>
         <th>第1四分位数(25%)</th>
-        <th>第2四分位数(50%)</th>
+        <th>中央値(50%)</th>
         <th>第3四分位数(75%)</th>
         <th>最大値(max)</th>
     </tr>
@@ -15,9 +15,9 @@
         <td>#(stats.mean)</td>
         <td>#(stats.std)</td>
         <td>#(stats.min)</td>
-        <td>#(stats.lowMid)</td>
-        <td>#(stats.mid)</td>
-        <td>#(stats.highMid)</td>
+        <td>#(stats.medianLow)</td>
+        <td>#(stats.median)</td>
+        <td>#(stats.medianHigh)</td>
         <td>#(stats.max)</td>
     </tr>
 }

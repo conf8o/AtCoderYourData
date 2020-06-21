@@ -20,5 +20,28 @@ struct HistoryColumns: Content {
         self.newRating  = histories.map { $0.newRating }
         self.diff       = histories.map { $0.diff }
     }
+}
+
+extension HistoryColumns {
+    private func joined(separator: String) -> String {
+        let data: [String] = [
+            id.map { $0?.description ?? "NULL" }.joined(separator: separator),
+            userId.joined(separator: separator),
+            date.joined(separator: separator),
+            contest.joined(separator: separator),
+            rank.map { $0.description }.joined(separator: separator),
+            perf.map { $0?.description ?? "NULL" }.joined(separator: separator),
+            newRating.map { $0?.description ?? "NULL" }.joined(separator: separator),
+            diff.map { $0?.description ?? "NULL" }.joined(separator: separator)
+        ]
+        
+        return data.joined(separator: "\n")
+    }
+    func toCSV() -> String {
+        return joined(separator: ",")
+    }
     
+    func joinedByTAB() -> String {
+        return joined(separator: "\t")
+    }
 }

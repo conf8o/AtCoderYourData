@@ -1,8 +1,6 @@
 #set("body") {
     <header></header>
-    <div>
-        #get(contents)
-    </div>
+    <div class="contents">#get(contents)</div>
     <footer></footer>
 }
 

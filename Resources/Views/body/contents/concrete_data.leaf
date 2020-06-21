@@ -2,10 +2,10 @@
     <h3>#(data.type)</h3>
     <h4>列ベース</h4>
     <pre>
-    #(data.columnsBase)
+#(data.columnsBase)
     </pre>
     <h4>行ベース</h4>
     <pre>
-    #(data.rowsBase)
+#(data.rowsBase)
     </pre>
 </div>
