@@ -12,7 +12,7 @@ extension Array where Self.Element == Double{
     
     func medianLow(alreadySorted: Bool = false) -> Double {
         let data = alreadySorted ? self : self.sorted()
-        return Array(data[..<(count/2)]).median()
+        return Array(data[..<(count/2)]).median(alreadySorted: true)
     }
     
     func median(alreadySorted: Bool = false) -> Double {
@@ -29,7 +29,7 @@ extension Array where Self.Element == Double{
     func medianHigh(alreadySorted: Bool = false) -> Double {
         let data = alreadySorted ? self : self.sorted()
         let add = count % 2
-        return Array(data[(count/2+add)...]).median()
+        return Array(data[(count/2+add)...]).median(alreadySorted: true)
     }
     
     func describe() -> [String: Double]{
