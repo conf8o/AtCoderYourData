@@ -22,7 +22,7 @@ extension Array where Self.Element == Double{
             let l = data[count/2-1]
             return (r + l) / 2
         } else {
-            return self[count/2]
+            return data[count/2]
         }
     }
     
