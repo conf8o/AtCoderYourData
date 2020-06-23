@@ -1,6 +1,6 @@
 import Foundation
 
-extension Array where Self.Element == Double{
+extension Array where Self.Element == Double {
     func mean() -> Double {
         return reduce(0, +) / Double(count)
     }
@@ -32,7 +32,7 @@ extension Array where Self.Element == Double{
         return Array(data[(count/2+add)...]).median(alreadySorted: true)
     }
     
-    func describe() -> [String: Double]{
+    func describe() -> [String: Double] {
         let data = sorted()
         var stats = [String: Double]()
         let m = data.mean()

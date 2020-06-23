@@ -23,10 +23,10 @@ extension HistoryAPIController {
         
             return History.query(on: req).filter(\.userId, .equal, userId).first().flatMap { result in
                 if let _ = result {
-                    print("rows from database")
+                    print("from database")
                     return History.query(on: req).filter(\.userId, .equal, userId).all().map(convertFunc)
                 } else {
-                    print("rows from AtCoder")
+                    print("from AtCoder")
                     return History.fromAtCoder(from: userId).map { $0.create(on: req) }.flatten(on: req).map(convertFunc)
                 }
             }
@@ -48,7 +48,7 @@ extension HistoryAPIController {
         return fromAtCoder { $0.toCSV() }
     }
     var csvColumns: (Request) throws -> Future<String> {
-        return fromAtCoder { HistoryColumns(histories: $0).toCSV()}
+        return fromAtCoder { HistoryColumns(histories: $0).toCSV() }
     }
 }
 

@@ -14,14 +14,15 @@ extension HistoryViewController {
         
         let rowsAndColumns: Future<([History], HistoryColumns)> = History.query(on: req)
             .filter(\.userId, .equal, userId)
-            .first().flatMap { result in
+            .first()
+            .flatMap { result in
             if let _ = result {
-                print("colums from database")
+                print("from database")
                 return History.query(on: req).filter(\.userId, .equal, userId).all().map { histories in
                     return (histories, HistoryColumns(histories: histories))
                 }
             } else {
-                print("colums from AtCoder")
+                print("from AtCoder")
                 return History.fromAtCoder(from: userId).map { $0.create(on: req) }.flatten(on: req).map { histories in
                     return (histories, HistoryColumns(histories: histories))
                 }
@@ -31,21 +32,8 @@ extension HistoryViewController {
         let rowsAndColumnsAndStats: Future<([History], HistoryColumns, [BasicStats])> = rowsAndColumns.map { histories, historyColumns in
             
             let rank = historyColumns.rank.compactMap { Double($0) }.describe()
-            let perf = historyColumns.perf.compactMap { x in
-                if let x = x {
-                    return Double(x)
-                } else {
-                    return nil
-                }
-            }.describe()
-            
-            let diff = historyColumns.diff.compactMap { x in
-                if let x = x {
-                    return Double(x)
-                } else {
-                    return nil
-                }
-            }.describe()
+            let perf = historyColumns.perf.compactMap { $0.map { x in Double(x) } }.describe()
+            let diff = historyColumns.diff.compactMap { $0.map { x in Double(x) } }.describe()
             
             let basicStatsList = [
                 BasicStats(title: "パフォーマンス(Ratedのみ)", stats: perf),
