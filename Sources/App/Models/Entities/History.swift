@@ -42,19 +42,18 @@ final class History: SQLiteModel {
         do {
             let url = URL(string: "https://atcoder.jp/users/\(userId)/history")!
             let doc = try HTML(url: url, encoding: .utf8)
-            if let table = doc.xpath("//table").first {
-                let trs = table.xpath("//tr").filter { $0.text?.trimmingCharacters(in: .whitespacesAndNewlines) != "" }
-                let data: [History] = trs[1...].compactMap { tr in
-                    let data: [Stirng]? = tr.text?
-                                            .split(separator: "\n")
-                                            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-                                            .filter { $0 != "" }
-                    return data.map { History(userId: userId, data: $0) }
-                }
-                return data
-            } else {
-                return []
+            guard let table = doc.xpath("//table").first else { return [] }
+            
+            let trs = table.xpath("//tr").filter { $0.text?.trimmingCharacters(in: .whitespacesAndNewlines) != "" }
+            
+            let histories: [History] = trs[1...].compactMap { tr in
+                let data: [String]? = tr.text?
+                                        .split(separator: "\n")
+                                        .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                                        .filter { $0 != "" }
+                return data.map { History(userId: userId, data: $0) }
             }
+            return histories
         } catch {
             print(error)
             return []
