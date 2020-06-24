@@ -45,14 +45,11 @@ final class History: SQLiteModel {
             if let table = doc.xpath("//table").first {
                 let trs = table.xpath("//tr").filter { $0.text?.trimmingCharacters(in: .whitespacesAndNewlines) != "" }
                 let data: [History] = trs[1...].compactMap { tr in
-                    if let data = (tr.text?
-                        .split(separator: "\n")
-                        .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-                        .filter { $0 != "" }) {
-                        return History(userId: userId, data: data)
-                    } else {
-                        return nil
-                    }
+                    return tr.text?
+                             .split(separator: "\n")
+                             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                             .filter { $0 != "" }
+                             .map { History(userId: userId, data: $0) }
                 }
                 return data
             } else {
