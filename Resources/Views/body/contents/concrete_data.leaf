@@ -1,11 +1,17 @@
 <div class="concrete_data_content">
-    <h3>#(data.type)</h3>
-    <h4>列ベース</h4>
-    <pre>
+    <h3 class="h3-ul">#(data.type)</h3>
+    <div class="d-flex flex-row">
+        <h5>列ベース</h5>
+        (url)
+    </div>
+    <pre class="bg-light">
 #(data.columnsBase)
     </pre>
-    <h4>行ベース</h4>
-    <pre>
+    <div class="d-flex flex-row">
+        <h5>行ベース</h5>
+        (url)
+    </div>
+    <pre class="bg-light">
 #(data.rowsBase)
     </pre>
 </div>

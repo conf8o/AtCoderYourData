@@ -1,24 +1,27 @@
-<table>
-    <tr>
-        <th></th>
-        <th>平均(mean)</th>
-        <th>標準偏差(standard deviation)</th>
-        <th>最小値(min)</th>
-        <th>第1四分位数(25%)</th>
-        <th>中央値(50%)</th>
-        <th>第3四分位数(75%)</th>
-        <th>最大値(max)</th>
-    </tr>
-#for(stats in basicStatsList) {
-    <tr>
-        <td>#(stats.title)</td>
-        <td>#(stats.mean)</td>
-        <td>#(stats.std)</td>
-        <td>#(stats.min)</td>
-        <td>#(stats.medianLow)</td>
-        <td>#(stats.median)</td>
-        <td>#(stats.medianHigh)</td>
-        <td>#(stats.max)</td>
-    </tr>
-}
+<div id="stats">
+    <h3 class="h3-ul">統計情報例</h3>
+    <table class="table table-striped">
+        <tr>
+            <th></th>
+            <th>平均(mean)</th>
+            <th>標準偏差(standard deviation)</th>
+            <th>最小値(min)</th>
+            <th>第1四分位数(25%)</th>
+            <th>中央値(50%)</th>
+            <th>第3四分位数(75%)</th>
+            <th>最大値(max)</th>
+        </tr>
+    #for(stats in basicStatsList) {
+        <tr>
+            <td>#(stats.title)</td>
+            <td>#(stats.mean)</td>
+            <td>#(stats.std)</td>
+            <td>#(stats.min)</td>
+            <td>#(stats.medianLow)</td>
+            <td>#(stats.median)</td>
+            <td>#(stats.medianHigh)</td>
+            <td>#(stats.max)</td>
+        </tr>
+    }
+    </table>
 </table>

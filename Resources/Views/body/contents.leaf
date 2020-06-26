@@ -1,9 +1,9 @@
 #set("title") {
-    #(title)
+    #(userId)
 }
 
 #set("contents") {
-    <div id="user">#(userId)</div>
+    <h2 id="user" class="display-5 mb-3">#(userId)</h2>
     <div id="basic_stats">
     #embed("body/contents/basic_stats")
     </div>
@@ -12,6 +12,10 @@
         #embed("body/contents/concrete_data")
     }
     </div>
+}
+
+#set("stylesheet") {
+    <link rel="stylesheet" type="text/css" href="/css/headline.css">
 }
 
 #embed("body/body_base")

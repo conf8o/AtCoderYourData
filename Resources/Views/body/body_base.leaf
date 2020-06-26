@@ -1,10 +1,17 @@
 #set("body") {
-    <header>
-        AtCoder Your Data
-        <textarea></textarea>
-        <button>検索</button>
+    <header class="bg-dark d-flex flex-row px-3 mb-3">
+        <h1 class="text-light mr-3">AtCoder Your Data</h1>
+        <form class="form-inline">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">AtCoder ID:</span>
+                </div>
+                <input type="text" class="form-control">
+                <input class="btn btn-primary" type="submit" value="検索">
+            </div>
+        </form>
     </header>
-    <div class="contents">#get(contents)</div>
+    <div class="container">#get(contents)</div>
     <footer></footer>
 }
 

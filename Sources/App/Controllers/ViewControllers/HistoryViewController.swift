@@ -36,7 +36,7 @@ extension HistoryViewController {
             let diff = historyColumns.diff.compactMap { $0.map { x in Double(x) } }.describe()
             
             let basicStatsList = [
-                BasicStats(title: "パフォーマンス(Ratedのみ)", stats: perf),
+                BasicStats(title: "パフォーマンス", stats: perf),
                 BasicStats(title: "差分", stats: diff),
                 BasicStats(title: "順位", stats: rank)
             ]
