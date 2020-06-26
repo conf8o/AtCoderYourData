@@ -6,11 +6,11 @@ final class HistoryAPIController: RouteCollection {
         history.get("rows", use: fromAtCoder { $0 })
         history.get("columns", use: fromAtCoder { HistoryColumns(histories: $0) })
         
-        let csv = router.grouped("csv", "history")
+        let csv = history.grouped("csv")
         csv.get("rows", use: csvRows)
         csv.get("columns", use: csvColumns)
         
-        let tab = router.grouped("tab", "history")
+        let tab = history.grouped("tab")
         tab.get("rows", use: tabRows)
         tab.get("columns", use: tabColumns)
     }
