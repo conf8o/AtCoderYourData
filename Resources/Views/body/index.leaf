@@ -3,7 +3,82 @@
 }
 
 #set("contents") {
-    <p>hello index</p>
+    <div class="mb-3">
+        <h3 class="h3-ul">About</h3>
+        <div class="md-3">
+            コンテスト成績表から以下のデータをいろいろな形式で取得します。
+            <ul>
+                <li>日付</li>
+                <li>コンテスト</li>
+                <li>順位</li>
+                <li>パフォーマンス</li>
+                <li>新Rating</li>
+                <li>差分</li>
+            </ul>
+            パフォーマンス等を解析するために是非ご利用ください。
+        </div>
+    </div>
+    <div class="mb-3">
+        <h3 class="h3-ul">データの確認</h3>
+        <div>AtCoderのIDで検索すると統計情報の例と具体的なデータが表示されます。</div>
+    </div>
+    <div class="mb-3">
+        <h3 class="h3-ul">API</h3>
+        <div>
+            <div class="mb-2">
+            検索した際に表示される具体的なデータはAPIで取得することができます。<br>
+            形式については検索していただければ詳細が確認できますが、あらかた以下のような形式になっています。
+            <pre id="#(data.type)-columns-data" class="bg-dark text-light">
+date[sep]contest[sep]rank[sep]perf[sep]newRating[sep]diff[sep]
+date1[sep]...[sep]diff1[sep]
+...
+dateN[sep]...[sep]diffN[sep]</pre>
+            現在はJSON, CSV, TAB区切り文字列の形式でデータを取得するAPIを提供しています。ベースとなるURLは以下の通りです。
+            </div>
+            <table class="table">
+                <tr>
+                    <th>データ形式</th>
+                    <th>API</th>
+                </tr>
+                <tr>
+                    <td>JSON(列ベース)</td>
+                    <td>/api/history/columns?user={AtCoder User ID\}</td>
+                </tr>
+                <tr>
+                    <td>JSON(行ベース)</td>
+                    <td>/api/history/rows?user={AtCoder User ID\}</td>
+                </tr>
+                <tr>
+                    <td>CSV(列ベース)</td>
+                    <td>/api/history/csv/columns?user={AtCoder User ID\}</td>
+                </tr>
+                <tr>
+                    <td>CSV(行ベース)</td>
+                    <td>/api/history/csv/rows?user={AtCoder User ID\}</td>
+                </tr>
+                <tr>
+                    <td>TAB区切り(列ベース)</td>
+                    <td>/api/history/tab/columns?user={AtCoder User ID\}</td>
+                </tr>
+                <tr>
+                    <td>TAB区切り(行ベース)</td>
+                    <td>/api/history/tab/rows?user={AtCoder User ID\}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        作者情報:
+        <ul>
+            <li>AtCoder: conf8o</li>
+            <li>Twitter: @conf8o</li>
+            <li>GitHub: @conf8o</li>
+        </ul>
+    </div>
+}
+
+#set("stylesheet") {
+    <link rel="stylesheet" type="text/css" href="/css/headline.css">
 }
 
 #embed("body/body_base")

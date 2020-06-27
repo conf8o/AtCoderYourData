@@ -1,17 +1,39 @@
 <div class="concrete_data_content">
     <h3 class="h3-ul">#(data.type)</h3>
-    <div class="d-flex flex-row">
-        <h5>列ベース</h5>
-        (url)
+    <div class="card mb-3">
+        <div class="card-header">
+            列ベース
+        </div>
+        <div class="card-body">
+            <div class="d-frex flex-row mb-1">
+                <a href="#(data.columnsURL)" id="#(data.type)-columns-url">#(data.columnsURL)</a>
+                <button type="button" class="clipboard btn btn-outline-primary btn-sm" data-clipboard-target="##(data.type)-columns-url">URLをコピー</button>
+            </div>
+            <div class="bg-dark card-text">
+                <div class="text-right">
+                  <button type="button" class="clipboard btn btn-outline-light btn-sm" data-clipboard-target="##(data.type)-columns-data">データをコピー</button>
+                </div>
+                <pre id="#(data.type)-columns-data" class="text-light">
+#(data.columnsBase)</pre>
+            </div>
+        </div>
     </div>
-    <pre class="bg-light">
-#(data.columnsBase)
-    </pre>
-    <div class="d-flex flex-row">
-        <h5>行ベース</h5>
-        (url)
+    <div class="card mb-3">
+        <div class="card-header">
+            行ベース
+        </div>
+        <div class="card-body">
+            <div class="d-frex flex-row mb-1">
+                <a href="#(data.rowsURL)" id="#(data.type)-rows">#(data.rowsURL)</a>
+                <button type="button" class="clipboard btn btn-outline-primary btn-sm" data-clipboard-target="##(data.type)-rows">URLをコピー</button>
+            </div>
+            <div class="bg-dark card-text">
+                <div class="text-right">
+                    <button type="button" class="clipboard btn btn-outline-light btn-sm" data-clipboard-target="##(data.type)-rows-data">データをコピー</button>
+                </div>
+                <pre id="#(data.type)-rows-data" class="text-light">
+#(data.rowsBase)</pre>
+            </div>
+        </div>
     </div>
-    <pre class="bg-light">
-#(data.rowsBase)
-    </pre>
 </div>

@@ -1,18 +1,16 @@
 #set("body") {
-    <header class="bg-dark d-flex flex-row px-3 mb-3">
-        <h1 class="text-light mr-3">AtCoder Your Data</h1>
-        <form class="form-inline">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">AtCoder ID:</span>
-                </div>
-                <input type="text" class="form-control">
-                <input class="btn btn-primary" type="submit" value="検索">
+    <nav class="bg-dark d-flex flex-row px-3 mb-3">
+        <a href="http://localhost:8080/" style="text-decoration:none;">
+            <h1 class="text-light mr-3">AtCoder Your Data</h1>
+        </a>
+        <form action="http://localhost:8080/data" method="get" class="form-inline" class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">@</span>
             </div>
+            <input type="text" name="user" class="form-control" placeholder="AtCoder ID">
         </form>
-    </header>
+    </nav>
     <div class="container">#get(contents)</div>
-    <footer></footer>
 }
 
 #embed("base")
