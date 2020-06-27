@@ -3,8 +3,8 @@ import Vapor
 final class HistoryAPIController: RouteCollection {
     func boot(router: Router) throws {
         let history = router.grouped("api", "history")
-        history.get("rows", use: fromAtCoder { $0 })
-        history.get("columns", use: fromAtCoder { HistoryColumns(histories: $0) })
+        history.get("rows", use: rows)
+        history.get("columns", use: columns)
         
         let csv = history.grouped("csv")
         csv.get("rows", use: csvRows)
