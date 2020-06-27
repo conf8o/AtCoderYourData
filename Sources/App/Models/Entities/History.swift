@@ -5,7 +5,6 @@ import Kanna
 final class History: SQLiteModel {
     typealias Database = SQLiteDatabase
     static let userIdKey: KeyPath<History, String> = \.userId
-    static let labels = ["id", "userId", "date", "contest", "rank", "perf", "diff"]
     
     var id: Int?
     var userId: String
@@ -58,39 +57,6 @@ final class History: SQLiteModel {
             print(error)
             return []
         }
-    }
-}
-
-extension History {
-    private func joined(separator: String) -> String {
-        let values: [String] = [
-            id?.description ?? "NULL",
-            userId,
-            date,
-            contest,
-            rank.description,
-            perf?.description ?? "NULL",
-            newRating?.description ?? "NULL"
-        ]
-        
-        return values.joined(separator: separator)
-    }
-    func toCSV() -> String {
-        return joined(separator: ",")
-    }
-    
-    func joinedByTAB() -> String {
-        return joined(separator: "\t")
-    }
-}
-
-extension Array where Self.Element == History {
-    func toCSV() -> String {
-        return self.map { $0.toCSV() }.joined(separator: "\n")
-    }
-    
-    func joinedByTAB() -> String {
-        return self.map { $0.joinedByTAB() }.joined(separator: "\n")
     }
 }
 

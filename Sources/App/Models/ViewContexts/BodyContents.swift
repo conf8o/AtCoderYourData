@@ -31,4 +31,6 @@ struct ConcreteData: Encodable {
     var type: String
     var columnsBase: String
     var rowsBase: String
+    var columnsURL: String
+    var rowsURL: String
 }

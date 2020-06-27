@@ -34,8 +34,8 @@ extension HistoryAPIController {
         return use
     }
     
-    var rows: (Request) throws -> Future<[History]> {
-        return fromAtCoder { $0 }
+    var rows: (Request) throws -> Future<HistoryRows> {
+        return fromAtCoder { HistoryRows(histories: $0) }
     }
     
     var columns: (Request) throws -> Future<HistoryColumns> {
@@ -45,7 +45,7 @@ extension HistoryAPIController {
 
 extension HistoryAPIController {
     var csvRows: (Request) throws -> Future<String> {
-        return fromAtCoder { $0.toCSV() }
+        return fromAtCoder { HistoryRows(histories: $0).toCSV() }
     }
     var csvColumns: (Request) throws -> Future<String> {
         return fromAtCoder { HistoryColumns(histories: $0).toCSV() }
@@ -54,7 +54,7 @@ extension HistoryAPIController {
 
 extension HistoryAPIController {
     var tabRows: (Request) throws -> Future<String> {
-        return fromAtCoder { $0.joinedByTAB() }
+        return fromAtCoder { HistoryRows(histories: $0).joinedByTAB() }
     }
     
     var tabColumns: (Request) throws -> Future<String> {
