@@ -5,4 +5,4 @@ enum DevelopConfig {
     case product
 }
 
-let DEV_CONFIG = DevelopConfig.dev
+let DEV_CONFIG = DevelopConfig.product

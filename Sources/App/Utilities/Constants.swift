@@ -5,6 +5,6 @@ let ROOT_URL: String = {
     case .dev:
         return "http://localhost:8080"
     case .product:
-        return "http://localhost:8080"
+        return "https://atcoder-your-data.herokuapp.com"
     }
 }()
