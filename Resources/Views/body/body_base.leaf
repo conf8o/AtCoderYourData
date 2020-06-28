@@ -3,7 +3,7 @@
         <a href="http://localhost:8080/" style="text-decoration:none;">
             <h1 class="text-light mr-3">AtCoder Your Data</h1>
         </a>
-        <form action="http://localhost:8080/data" method="get" class="form-inline" class="input-group">
+        <form action="/data" method="get" class="form-inline" class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">@</span>
             </div>
