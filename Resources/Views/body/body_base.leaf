@@ -13,4 +13,8 @@
     <div class="container">#get(contents)</div>
 }
 
+#set("scripts") {
+    <script src="/js/input-utils.js"></script>
+}
+
 #embed("base")
