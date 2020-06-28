@@ -10,7 +10,8 @@ final class HistoryViewController: RouteCollection {
 
 extension HistoryViewController {
     func data(_ req: Request) throws -> Future<View> {
-        let userId = try req.query.get(String.self, at: "user")
+        var userId = try req.query.get(String.self, at: "user")
+        
         
         let rowsAndColumns: Future<(HistoryRows, HistoryColumns)> = History.query(on: req)
             .filter(\.userId, .equal, userId)
@@ -30,6 +31,11 @@ extension HistoryViewController {
         }
         
         let rowsAndColumnsAndStats: Future<(HistoryRows, HistoryColumns, [BasicStats])> = rowsAndColumns.map { historyRows, historyColumns in
+            
+            guard !historyRows.histories.isEmpty else {
+                userId = "お探しのユーザは見つかりませんでした。"
+                return (historyRows, historyColumns, [])
+            }
             
             let rank = historyColumns.rank.compactMap { Double($0) }.describe()
             let perf = historyColumns.perf.compactMap { $0.map { x in Double(x) } }.describe()
