@@ -39,7 +39,7 @@ final class History: SQLiteModel {
     
     static func fromAtCoder(from userId: String) -> [History] {
         do {
-            let url = URL(string: "https://atcoder.jp/users/\(userId)/history")!
+            guard let url = URL(string: "https://atcoder.jp/users/\(userId)/history") else { return [] }
             let doc = try HTML(url: url, encoding: .utf8)
             guard let table = doc.xpath("//table").first else { return [] }
             

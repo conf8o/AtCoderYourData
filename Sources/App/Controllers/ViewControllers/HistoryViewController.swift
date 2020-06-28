@@ -33,7 +33,7 @@ extension HistoryViewController {
         let rowsAndColumnsAndStats: Future<(HistoryRows, HistoryColumns, [BasicStats])> = rowsAndColumns.map { historyRows, historyColumns in
             
             guard !historyRows.histories.isEmpty else {
-                userId = "お探しのユーザは見つかりませんでした。"
+                userId = ""
                 return (historyRows, historyColumns, [])
             }
             
@@ -80,7 +80,8 @@ extension HistoryViewController {
             let json = try jsonEncodedData("JSON", .init())
             let jsonPretty = try jsonEncodedData("Pretty_JSON", .prettyPrinted)
             
-            let contents = BodyContents(userId: userId, basicStatsList: statsList, concreteDataList: [csv, tab, json, jsonPretty])
+            
+            let contents = BodyContents(userId: userId == "" ? "お探しのユーザは見つかりませんでした。" : userId, basicStatsList: statsList, concreteDataList: [csv, tab, json, jsonPretty])
             return try req.view().render("body/contents", contents)
         }
         
