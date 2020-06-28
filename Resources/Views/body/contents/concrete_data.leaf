@@ -7,11 +7,13 @@
         <div class="card-body">
             <div class="d-frex flex-row mb-1">
                 <a href="#(data.columnsURL)" id="#(data.type)-columns-url">#(data.columnsURL)</a>
-                <button type="button" class="clipboard btn btn-outline-primary btn-sm" data-clipboard-target="##(data.type)-columns-url">URLをコピー</button>
+                <button type="button" name="#(data.type)-columns-url-copy" class="clipboard btn btn-outline-primary btn-sm" data-clipboard-target="##(data.type)-columns-url">URLをコピー</button>
+                <span name="#(data.type)-columns-url-copy" class="text-primary"></span>
             </div>
             <div class="bg-dark card-text">
                 <div class="text-right">
-                  <button type="button" class="clipboard btn btn-outline-light btn-sm" data-clipboard-target="##(data.type)-columns-data">データをコピー</button>
+                  <span name="#(data.type)-columns-copy" class="text-light"></span>
+                  <button type="button" name="#(data.type)-columns-copy" class="clipboard btn btn-outline-light btn-sm" data-clipboard-target="##(data.type)-columns-data">データをコピー</button>
                 </div>
                 <pre id="#(data.type)-columns-data" class="text-light">
 #(data.columnsBase)</pre>
@@ -25,11 +27,13 @@
         <div class="card-body">
             <div class="d-frex flex-row mb-1">
                 <a href="#(data.rowsURL)" id="#(data.type)-rows">#(data.rowsURL)</a>
-                <button type="button" class="clipboard btn btn-outline-primary btn-sm" data-clipboard-target="##(data.type)-rows">URLをコピー</button>
+                <button type="button" name="#(data.type)-rows-url-copy" class="clipboard btn btn-outline-primary btn-sm" data-clipboard-target="##(data.type)-rows">URLをコピー</button>
+                <span name="#(data.type)-rows-url-copy" class="text-primary"></span>
             </div>
             <div class="bg-dark card-text">
                 <div class="text-right">
-                    <button type="button" class="clipboard btn btn-outline-light btn-sm" data-clipboard-target="##(data.type)-rows-data">データをコピー</button>
+                    <span name="#(data.type)-rows-copy" class="text-light"></span>
+                    <button type="button" name="#(data.type)-rows-copy" class="clipboard btn btn-outline-light btn-sm" data-clipboard-target="##(data.type)-rows-data">データをコピー</button>
                 </div>
                 <pre id="#(data.type)-rows-data" class="text-light">
 #(data.rowsBase)</pre>

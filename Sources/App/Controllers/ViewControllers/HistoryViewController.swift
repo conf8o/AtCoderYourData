@@ -72,7 +72,7 @@ extension HistoryViewController {
             }
             
             let json = try jsonEncodedData("JSON", .init())
-            let jsonPretty = try jsonEncodedData("JSON(Pretty)", .prettyPrinted)
+            let jsonPretty = try jsonEncodedData("Pretty_JSON", .prettyPrinted)
             
             let contents = BodyContents(userId: userId, basicStatsList: statsList, concreteDataList: [csv, tab, json, jsonPretty])
             return try req.view().render("body/contents", contents)

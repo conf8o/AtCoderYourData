@@ -1,6 +1,6 @@
 import Foundation
 
-extension Array where Self.Element == Double {
+extension Array where Array.Element == Double {
     func mean() -> Double {
         return reduce(0, +) / Double(count)
     }

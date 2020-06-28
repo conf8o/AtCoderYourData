@@ -27,18 +27,18 @@
         <div>
             <div class="mb-2">
             検索した際に表示される具体的なデータはAPIで取得することができます。<br>
-            形式については検索していただければ詳細が確認できますが、あらかた以下のような形式になっています。
+            形式については検索していただければ詳細が確認できますが、あらかた以下のような形式になっています。([sep]は区切り文字)
             <pre id="#(data.type)-columns-data" class="bg-dark text-light">
-date[sep]contest[sep]rank[sep]perf[sep]newRating[sep]diff[sep]
-date1[sep]...[sep]diff1[sep]
+date[sep]contest[sep]rank[sep]perf[sep]newRating[sep]diff
+date1[sep]...[sep]diff1
 ...
-dateN[sep]...[sep]diffN[sep]</pre>
+dateN[sep]...[sep]diffN</pre>
             現在はJSON, CSV, TAB区切り文字列の形式でデータを取得するAPIを提供しています。ベースとなるURLは以下の通りです。
             </div>
             <table class="table">
                 <tr>
                     <th>データ形式</th>
-                    <th>API</th>
+                    <th>API(GET)</th>
                 </tr>
                 <tr>
                     <td>JSON(列ベース)</td>
