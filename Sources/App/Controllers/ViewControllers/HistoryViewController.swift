@@ -27,7 +27,7 @@ extension HistoryViewController {
                     print("updated", updated)
                     return historiesFuture.and(lastContest.create(on: req)).map { histories, contest in
                         var histories = histories
-                        histories.insert(contest, at: 0)
+                        histories.append(contest)
                         return (HistoryRows(histories: histories), HistoryColumns(histories: histories))
                     }
                 } else {
