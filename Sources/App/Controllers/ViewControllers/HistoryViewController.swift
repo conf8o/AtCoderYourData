@@ -16,11 +16,24 @@ extension HistoryViewController {
         let rowsAndColumns: Future<(HistoryRows, HistoryColumns)> = History.query(on: req)
             .filter(\.userId, .equal, userId)
             .first()
-            .flatMap { result in
+            .and(LastContest.updated(conn: req))
+            .flatMap { result, updated in
             if let _ = result {
                 print("from database")
-                return History.query(on: req).filter(\.userId, .equal, userId).all().map { histories in
-                    return (HistoryRows(histories: histories), HistoryColumns(histories: histories))
+                
+                let historiesFuture = History.query(on: req).filter(\.userId, .equal, userId).all()
+                
+                if updated, let lastContest = History.fromAtCoder(from: userId).first {
+                    print("updated", updated)
+                    return historiesFuture.and(lastContest.create(on: req)).map { histories, contest in
+                        var histories = histories
+                        histories.insert(contest, at: 0)
+                        return (HistoryRows(histories: histories), HistoryColumns(histories: histories))
+                    }
+                } else {
+                    return historiesFuture.map { histories in
+                        return (HistoryRows(histories: histories), HistoryColumns(histories: histories))
+                    }
                 }
             } else {
                 print("from AtCoder")
@@ -81,7 +94,9 @@ extension HistoryViewController {
             let jsonPretty = try jsonEncodedData("Pretty_JSON", .prettyPrinted)
             
             
-            let contents = BodyContents(userId: userId == "" ? "お探しのユーザは見つかりませんでした。" : userId, basicStatsList: statsList, concreteDataList: [csv, tab, json, jsonPretty])
+            let contents = BodyContents(userId: userId == "" ? "お探しのユーザは見つかりませんでした。" : userId,
+                                        basicStatsList: statsList,
+                                        concreteDataList: [csv, tab, json, jsonPretty])
             return try req.view().render("body/contents", contents)
         }
         

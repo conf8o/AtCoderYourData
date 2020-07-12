@@ -36,6 +36,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     // Configure migrations
     var migrations = MigrationConfig()
     migrations.add(model: History.self, database: .sqlite)
+    migrations.add(model: LastContest.self, database: .sqlite)
     services.register(migrations)
     
     // Configure Leaf

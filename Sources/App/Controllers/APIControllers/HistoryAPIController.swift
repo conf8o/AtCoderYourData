@@ -21,10 +21,28 @@ extension HistoryAPIController {
         let use: (Request) throws -> Future<T> = { req in
             let userId = try req.query.get(String.self, at: "user")
         
-            return History.query(on: req).filter(\.userId, .equal, userId).first().flatMap { result in
+            let existsAndUpdated: Future<(History?, Bool)> = History
+                .query(on: req)
+                .filter(\.userId, .equal, userId)
+                .first()
+                .and(LastContest.updated(conn: req))
+            
+            return existsAndUpdated.flatMap { result, updated in
                 if let _ = result {
                     print("from database")
-                    return History.query(on: req).filter(\.userId, .equal, userId).all().map(convertFunc)
+                    
+                    let historiesFuture = History.query(on: req).filter(\.userId, .equal, userId).all()
+                    
+                    if updated, let lastContest = History.fromAtCoder(from: userId).first {
+                        print("updated")
+                        return historiesFuture.and(lastContest.create(on: req)).map { histories, contest in
+                            var histories = histories
+                            histories.insert(contest, at: 0)
+                            return convertFunc(histories)
+                        }
+                    } else {
+                        return historiesFuture.map(convertFunc)
+                    }
                 } else {
                     print("from AtCoder")
                     return History.fromAtCoder(from: userId).map { $0.create(on: req) }.flatten(on: req).map(convertFunc)
