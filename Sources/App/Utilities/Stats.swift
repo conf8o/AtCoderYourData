@@ -38,11 +38,11 @@ extension Array where Array.Element == Double {
         let m = data.mean()
         stats["mean"] = m
         stats["std"] = data.std(knownMean: m)
-        stats["min"] = data.first!
+        stats["min"] = data.first ?? 0.0
         stats["medianLow"] = data.medianLow(alreadySorted: true)
         stats["median"] = data.median(alreadySorted: true)
         stats["medianHigh"] = data.medianHigh(alreadySorted: true)
-        stats["max"] = data.last!
+        stats["max"] = data.last ?? 0.0
         return stats
     }
 }

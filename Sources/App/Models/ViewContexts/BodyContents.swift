@@ -15,15 +15,15 @@ struct BasicStats: Encodable {
     var max: Double
     
     init(title: String, stats: [String: Double]) {
-        let stats = stats.mapValues { Double(String(format: "%.2f", $0))! }
+        let stats = stats.mapValues { Double(String(format: "%.2f", $0)) ?? 0.0 }
         self.title = title
-        self.mean = stats["mean"]!
-        self.std = stats["std"]!
-        self.min = stats["min"]!
-        self.medianLow = stats["medianLow"]!
-        self.median = stats["median"]!
-        self.medianHigh = stats["medianHigh"]!
-        self.max = stats["max"]!
+        self.mean = stats["mean"] ?? 0.0
+        self.std = stats["std"] ?? 0.0
+        self.min = stats["min"] ?? 0.0
+        self.medianLow = stats["medianLow"] ?? 0.0
+        self.median = stats["median"] ?? 0.0
+        self.medianHigh = stats["medianHigh"] ?? 0.0
+        self.max = stats["max"] ?? 0.0
     }
 }
 
